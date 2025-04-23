@@ -1,9 +1,6 @@
 package com.giaccento.registro_presenca.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -16,14 +13,19 @@ public class Usuario {
     private String nome;
     private String cpf;
     private String email;
-    //private LocalDateTime data;
+    private LocalDateTime data;
+
+    @PrePersist
+    public void prePersist() {
+        this.data = LocalDateTime.now();
+    }
 
     public Usuario(Long id, String nome, String cpf, String email, LocalDateTime data) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
-        //this.data = data;
+        this.data = data;
     }
 
     public Usuario() {
@@ -62,11 +64,11 @@ public class Usuario {
         this.email = email;
     }
 
-//    public LocalDateTime getData() {
-//        return data;
-//    }
+    public LocalDateTime getData() {
+        return data;
+    }
 
-//    public void setData(LocalDateTime data) {
-//        this.data = data;
-//    }
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
 }
